@@ -4,9 +4,15 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
 
-//llamar las rutas exportadas desde la carpeta Routes que serán expuestas
+const { sequelize } = require("./models"); //sugerencia copilot
+
+// Import routes
+const flightsRoutes = require("./routes/flightsRoutes");
+const personnelRoutes = require("./routes/personnelRoutes");
+const passengerRoutes = require("./routes/passengersRoutes");
+const serviceRoutes = require("./routes/servicesRoutes");
 
 const app = express();
 
@@ -17,10 +23,21 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}))
 
-//configurar rutas y darle salidas en endpoints
+// Configure routes
+app.use("/api/flights", flightsRoutes);
+app.use("/api/personnel", personnelRoutes);
+app.use("/api/passengers", passengerRoutes);
+app.use("/api/services", servicesRoutes);
+
+// Error handling middleware, sugerencia copilot
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ error: "Internal Server Error" });
+});
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, ()=>{
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 })
+
