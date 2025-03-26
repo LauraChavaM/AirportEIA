@@ -74,3 +74,5 @@ const personnelController = {
     }
 
 };
+
+module.exports = personnelController;

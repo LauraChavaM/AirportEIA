@@ -6,13 +6,13 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 
-const { sequelize } = require("./models"); //sugerencia copilot
-
 // Import routes
 const flightsRoutes = require("./routes/flightsRoutes");
 const personnelRoutes = require("./routes/personnelRoutes");
 const passengerRoutes = require("./routes/passengersRoutes");
 const serviceRoutes = require("./routes/servicesRoutes");
+const userRoutes = require("./routes/userRoutes");
+const authenticationRoutes = require("./routes/authenticationRoutes");
 
 const app = express();
 
@@ -28,6 +28,8 @@ app.use("/api/flights", flightsRoutes);
 app.use("/api/personnel", personnelRoutes);
 app.use("/api/passengers", passengerRoutes);
 app.use("/api/services", servicesRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/auth", authenticationRoutes);
 
 // Error handling middleware, sugerencia copilot
 app.use((err, req, res, next) => {

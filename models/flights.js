@@ -4,7 +4,7 @@ const { Model, DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
     class Flight extends Model {
       static associate(models) {
-        // A flight has many passengers but a passenger could have many flights (many-to-many), also each passenger has one baggage (one-to-one)
+        // A flight has many passengers but a passenger could have many flights (many-to-many)
         this.belongsToMany(models.Passenger, { 
             through: "PassengerFlight", // Junction table for many-to-many relationship
             foreignKey: "flight_number", // Foreign key in PassengerFlight for Flight

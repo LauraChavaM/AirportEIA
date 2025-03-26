@@ -11,7 +11,7 @@ const flightController = {
             model: Personnel, as: 'personnel'
           },
           {
-            model: Passenger, as: 'passengers', // Matches the alias defined in the Flight model
+            model: Passenger, as: 'passengers', 
             include: [{ model: Baggage, as: 'baggage' }],
           },
         ],

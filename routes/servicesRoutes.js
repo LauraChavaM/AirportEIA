@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const servicesController = require('../controller/servicesController');
+const authService = require("../services/authService");
 
-router.get('/', servicesController.getService);
-router.post('/', servicesController.createService);
-router.put('/:id', servicesController.updateService);
-router.delete('/:id', servicesController.deleteService);
+router.get('/', authService, servicesController.getService);
+router.post('/', authService, servicesController.createService);
+router.put('/:id', authService, servicesController.updateService);
+router.delete('/:id', authService, servicesController.deleteService);
 
 module.exports = router;
