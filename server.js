@@ -9,8 +9,8 @@ const bodyParser = require("body-parser");
 // Import routes
 const flightsRoutes = require("./routes/flightsRoutes");
 const personnelRoutes = require("./routes/personnelRoutes");
-const passengerRoutes = require("./routes/passengersRoutes");
-const serviceRoutes = require("./routes/servicesRoutes");
+const passengersRoutes = require("./routes/passengersRoutes");
+const servicesRoutes = require("./routes/servicesRoutes");
 const userRoutes = require("./routes/userRoutes");
 const authenticationRoutes = require("./routes/authenticationRoutes");
 
@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 // Configure routes
 app.use("/api/flights", flightsRoutes);
 app.use("/api/personnel", personnelRoutes);
-app.use("/api/passengers", passengerRoutes);
+app.use("/api/passengers", passengersRoutes);
 app.use("/api/services", servicesRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authenticationRoutes);
