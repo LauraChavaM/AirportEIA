@@ -57,6 +57,11 @@ module.exports = (sequelize) => {
         arrival_gate: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        status: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "Active"
         }
     }, {
         sequelize,

@@ -5,7 +5,7 @@ const authService = require("../services/authService");
 
 router.get('/', authService, servicesController.getService);
 router.post('/', authService, servicesController.createService);
-router.put('/:id', authService, servicesController.updateService);
+router.post('/:id', authService, servicesController.updateService);
 router.delete('/:id', authService, servicesController.deleteService);
 
 module.exports = router;
