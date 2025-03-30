@@ -5,43 +5,39 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("flights", {
       flight_number: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
         allowNull: false,
         primaryKey: true,
       },
       airline: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false
       },
       origin: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false
       },
       destination: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false
       },
       departure_time: {
-        type: DataTypes.DATE,
+        type: Sequelize.DATE,
         allowNull: false
       },
       arrival_time: {
-        type: DataTypes.DATE,
-        allowNull: false
-      },
-      status: {
-        type: DataTypes.STRING,
+        type: Sequelize.DATE,
         allowNull: false
       },
       departure_gate: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false
       },
       arrival_gate: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false
-      }, 
+      },
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
@@ -51,10 +47,15 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
         defaultValue: Sequelize.NOW,
+      },
+      status: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: "Active"
       }
     })
   },
-  
+
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable("flights");
   }

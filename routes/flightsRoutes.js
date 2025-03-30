@@ -6,6 +6,6 @@ const authService = require("../services/authService");
 router.get('/:id', authService, flightsController.getFlightById);
 router.post('/', authService, flightsController.createFlight);
 router.put('/:id', authService, flightsController.updateFlight)
-router.post("/ChangeStatus/:id", authService,flightsController.changeUserStatus);;
+router.post("/ChangeStatus/:id", authService,flightsController.changeFlightStatus);;
 
 module.exports = router;

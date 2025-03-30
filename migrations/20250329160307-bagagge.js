@@ -6,22 +6,22 @@ module.exports = {
     await queryInterface.createTable("baggage", {
 
       baggage_id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
         allowNull: false,
         primaryKey: true,
       },
       //association with passenger
       passenger_id: {
-        type: DataTypes.UUID,
+        type: Sequelize.UUID,
         references: {
-          model: "Passenger",
+          model: "passengers",
           key: "passenger_id"
         },
         onDelete: "RESTRICT"
       },
       status: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false
       },
       createdAt: {

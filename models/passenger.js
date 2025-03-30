@@ -32,13 +32,14 @@ module.exports = (sequelize) => {
                 allowNull: false
             },
             contact: {
-                type: DataTypes.STRING
+                type: DataTypes.STRING,
+                allowNull: false
             },
            
         }, {
             sequelize,
             modelName: 'Passenger',
-            tableName: 'Passenger',
+            tableName: 'passengers',
             timestamps: true,
         });
 

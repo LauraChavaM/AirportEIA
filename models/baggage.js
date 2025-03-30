@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
     passenger_id: {
       type: DataTypes.UUID, 
       references: {
-        model: "Passenger", 
+        model: "passengers", 
         key: "passenger_id" 
       },
       onDelete: "RESTRICT"

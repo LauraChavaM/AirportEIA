@@ -5,24 +5,25 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable("personnel", {
       personnel_id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
         allowNull: false,
         primaryKey: true,
       },
       name: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false
       },
       role: {
-        type: DataTypes.STRING,
+        type: Sequelize.STRING,
         allowNull: false
       },
       contact: {
-        type: DataTypes.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       flight_number: {
-        type: DataTypes.UUID,
+        type: Sequelize.UUID,
         allowNull: false,
         references: {
           model: 'flights',

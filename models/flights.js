@@ -46,10 +46,6 @@ module.exports = (sequelize) => {
             type: DataTypes.DATE,
             allowNull: false
         },
-        status: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
         departure_gate: {
             type: DataTypes.STRING,
             allowNull: false

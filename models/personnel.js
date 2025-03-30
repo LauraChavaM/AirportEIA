@@ -29,7 +29,8 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         contact: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false
         },
         flight_number: {
             type: DataTypes.UUID,
