@@ -13,8 +13,9 @@ const passengersRoutes = require("./routes/passengersRoutes");
 const servicesRoutes = require("./routes/servicesRoutes");
 const userRoutes = require("./routes/userRoutes");
 const authenticationRoutes = require("./routes/authenticationRoutes");
-const detalleFlightRoutes = require('./routes/detalleflight.routes');
-app.use('/detalleflights', detalleFlightRoutes);
+//const detalleFlightRoutes = require('./routes/detalleflight.routes');
+//app.use('/detalleflights', detalleFlightRoutes);
+
 // Import database connection
 //const { sequelize } = require("./models/index");
 
@@ -34,7 +35,7 @@ app.use("/api/passengers", passengersRoutes);
 app.use("/api/services", servicesRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authenticationRoutes);
-app.use('/detalleflights', detalleFlightRoutes);
+//app.use('/detalleflights', detalleFlightRoutes);
 
 // Error handling middleware, sugerencia copilot
 app.use((err, req, res, next) => {
