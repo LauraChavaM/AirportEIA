@@ -149,6 +149,33 @@ const passengersController = {
             res.status(500).json({ error: error.message });
         }
     },
+
+        // Delete a passenger, their baggage, and their flight associations
+    async delete(req, res) {
+        // tu código para delete
+    },
+
+    // NUEVO: Asignar un pasajero a un vuelo
+    async assignPassengerToFlight(req, res) {
+        try {
+            const { passengerId, flightId } = req.body;
+            
+            const passenger = await Passenger.findOne({ where: { passenger_id: passengerId } });
+            const flight = await Flight.findOne({ where: { flight_number: flightId } });
+
+            if (!passenger || !flight) {
+                return res.status(404).json({ message: 'Passenger or Flight not found' });
+            }
+
+            await passenger.addFlight(flight);
+
+            res.status(200).json({ message: 'Passenger assigned to flight successfully', passenger });
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    }
+
 };
 
 module.exports = passengersController;
+
