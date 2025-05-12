@@ -8,7 +8,7 @@ const passengersController = {
             const passengers = await Passenger.findAll({
                 include: [
                     { model: Baggage, as: 'baggage' },
-                    { model: Flight, as: 'flights' }, 
+                    { model: Flight, as: 'flights' },
                 ],
             });
             res.json(passengers);
@@ -23,7 +23,7 @@ const passengersController = {
             const passenger = await Passenger.findByPk(req.params.id, {
                 include: [
                     { model: Baggage, as: 'baggage' },
-                    { model: Flight, as: 'flights' }, 
+                    { model: Flight, as: 'flights' },
                 ],
             });
             if (!passenger) {
@@ -53,19 +53,19 @@ const passengersController = {
                     ...baggage,
                     passenger_id: newPassenger.passenger_id,
                 });
-                newPassenger.baggage = newBaggage; 
+                newPassenger.baggage = newBaggage;
             }
 
             // Associate the passenger with flights
             if (flights && flights.length > 0) {
-                const flightIds = flights.map(flight => flight.id);
-                const existingFlights = await Flight.findAll({ where: { id: flightIds } });
+                const flightIds = flights.map(flight => flight.id); // Ensure flights array contains only IDs
+                const existingFlights = await Flight.findAll({ where: { flight_number: flightIds } });
 
-                if (existingFlights.length !== flights.length) {
+                if (existingFlights.length !== flightIds.length) {
                     return res.status(404).json({ message: 'One or more flights not found' });
                 }
 
-                await newPassenger.addFlights(existingFlights); // Use Sequelize's many-to-many association method
+                await newPassenger.addFlights(existingFlights); // Associate existing flights
             }
 
             res.status(201).json(newPassenger);
@@ -101,7 +101,7 @@ const passengersController = {
                     ...baggage,
                     passenger_id: passenger.passenger_id,
                 });
-                passenger.baggage = newBaggage; 
+                passenger.baggage = newBaggage;
             }
 
             // Update flight associations
@@ -144,11 +144,53 @@ const passengersController = {
             // Delete the passenger
             await passenger.destroy();
 
-            res.status(204).send(); 
+            res.status(204).send();
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
     },
+
+    // Get all flights for a specific passenger 
+    async getPassengerFlights(req, res) {
+        try {
+            const passenger = await Passenger.findByPk(req.params.id, {
+                include: [{ model: Flight, as: 'flights' }],
+            });
+
+            if (!passenger) {
+                return res.status(404).json({ message: 'Passenger not found' });
+            }
+
+            res.json(passenger.flights);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    },
+
+
+    // Associate a passenger with a flight
+    async assignPassengerToFlight(req, res) {
+        const { passengerId, flightId } = req.body;
+
+        if (!passengerId || !flightId) {
+            return res.status(400).json({ message: 'Passenger ID and Flight ID are required' });
+        }
+
+        try {
+            const passenger = await Passenger.findByPk(passengerId);
+            const flight = await Flight.findByPk(flightId);
+
+            if (!passenger || !flight) {
+                return res.status(404).json({ message: 'Passenger or Flight not found' });
+            }
+
+            await passenger.addFlight(flight);
+
+            res.status(200).json({ message: 'Passenger assigned to flight successfully', passenger });
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    }
 };
 
 module.exports = passengersController;
