@@ -4,8 +4,9 @@ const flightsController = require('../controller/flightsController');
 const authService = require("../services/authService");
 
 router.get('/:id', authService, flightsController.getFlightById);
+router.get('/', authService, flightsController.getAllFlights);
 router.post('/', authService, flightsController.createFlight);
-router.put('/:id', authService, flightsController.updateFlight)
-router.post("/ChangeStatus/:id", authService,flightsController.changeFlightStatus);;
+router.post('/:id', authService, flightsController.updateFlight)
+router.post("/changeStatus/:id", authService,flightsController.changeFlightStatus);
 
 module.exports = router;
