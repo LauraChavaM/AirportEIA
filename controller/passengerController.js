@@ -173,7 +173,23 @@ const passengersController = {
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
-    }
+    },
+    // Get all flights for a specific passenger 
+    async getPassengerFlights(req, res) {
+        try {
+            const passenger = await Passenger.findByPk(req.params.id, {
+                include: [{ model: Flight, as: 'flights' }],
+            });
+
+            if (!passenger) {
+                return res.status(404).json({ message: 'Passenger not found' });
+            }
+
+            res.json(passenger.flights);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    },
 
 };
 
