@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
   }, {
     sequelize,
     modelName:'Service',
-    tableName:'service',
+    tableName:'services',
     timestamps: true
   });
 
